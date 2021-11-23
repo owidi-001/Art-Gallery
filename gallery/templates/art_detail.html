@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{% block title %} {{ art.name }} {% endblock title %}</h1>
+        <p class=" text-muted">{{ object.artist }} | {{ art.created_on }}</p>
+          <img src="{{ object.image.url }}" class="img-fluid" alt="">
+        <p class="card-text ">{{ object.description | safe }}</p>
+      {% if request.user == object.artist %}
+          <a href="{% url 'delete' art.id %}" class="btn btn-danger">Delete</a>
+          <a href="/" class="btn btn-secondary">Go back </a>
+      {% endif %}
+      </div>
+    </div>
+    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+  </div>
+</div>
+
+{% endblock content %}

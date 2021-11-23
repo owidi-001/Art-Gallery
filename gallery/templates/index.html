@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white text-center"> Welcome to the Gallery</h3>
+                    <p class="text-light text-center">We proudly have the best work as you can approve &nbsp
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container" style="min-height:70vh;">
+    <div class="row">
+        <!-- Art Entries Column -->
+    {% if not art %}
+    <div class="col-md-12 mt-3">
+        <div class="row">
+            {% for art in art_list %}
+            <div class="col-md-6">
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ art.name }}</h2>
+                    <p class="card-text text-muted h6">{{ art.artist }} | {{ art.created_on}} </p>
+                    <div class="card-image">
+                        <img src="{{ art.image.url }}" alt="" class="img-fluid img-thumbnail">
+                    </div>
+
+                    <p class="card-text">{{art.description|slice:":200" }}</p>
+                    <a href="{% url 'art_detail' art.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+            </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-8 mt-3 left">
+            <h3 class="text-center"> No art yet</h3>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'create' %}" class="text-center">Create</a> new art
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>  To add new art
+        {% endif %}
+        </div>
+    {% endif %}
+
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+    </div>
+</div>
+{%endblock%}

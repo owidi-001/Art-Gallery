@@ -1,0 +1,16 @@
+<div *ngIf="art" class="card mb-4">
+    <div class="card-image-top">
+        <img src={{art.image}} alt={{art.image}} class="img-fluid img-thumbnail">
+    </div>
+    <div class="card-body">
+        <h6>{{art.artist}}</h6>
+        <h2 class="card-title">{{art.name}}</h2>
+        <small class="card-text text-muted h6">Added | {{art.created_on}} </small>
+
+        <p class="card-text">{{art.description}}</p>
+    </div>
+    <div class="card-footer">
+        <span class="price">{{art.price}</span>
+        <a href="#" class="btn">Buy &rarr;</a>
+    </div>
+</div>
